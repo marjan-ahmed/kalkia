@@ -15,8 +15,8 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 // ---- Config / thresholds ----
 const THRESHOLDS = {
-  veryHotC: 32,
-  veryColdC: 5,
+  veryHotC: 30,
+  veryColdC: 10,
   veryWindyMs: 8,
   veryWetMm: 10,
   uncomfortableTempC: 28,

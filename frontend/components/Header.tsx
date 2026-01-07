@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ShinyButton } from "@/components/ui/shiny-button";
+import { ThresholdModal } from "@/components/ThresholdModal";
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -15,7 +16,7 @@ export default function Header() {
     { label: 'Home', href: '/' },
     { label: 'About', href: '/#about' },
      { label: 'Features', href: '/#features' },
-    { label: 'How It Works', href: '/#workflow' },
+    { label: 'Working', href: '/#workflow' },
   ];
 
   return (
@@ -71,7 +72,8 @@ export default function Header() {
 
         {/* Right side (Buttons + Mobile Menu) */}
         <div className="flex items-center gap-2">
-          <ShinyButton className='hidden sm:block'><Link href={'/dashboard'}>Get Started</Link></ShinyButton>
+          <ThresholdModal />
+          {/* <ShinyButton className='hidden sm:block'><Link href={'/dashboard'}>Get Started</Link></ShinyButton> */}
 
           <Sheet open={open} onOpenChange={setOpen}>
             <Button
@@ -114,6 +116,11 @@ export default function Header() {
                     " />
                   </a>
                 ))}
+                
+                {/* Add threshold button in mobile menu */}
+                <div className="pt-4 border-t">
+                  <ThresholdModal />
+                </div>
               </div>
               <SheetFooter>
                 <ShinyButton>
