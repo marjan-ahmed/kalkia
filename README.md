@@ -1,31 +1,114 @@
-# 🌌 NASA Weather App
+# Kalkia - Weather Probability Checker
 
-A collaborative hackathon project built with **Next.js (Frontend)**, **FastAPI (Backend)**, and **Python Data Analysis**.  
-This app fetches and visualizes NASA weather data, provides probability analysis, and offers a responsive dashboard UI.
+### 📌 Summary: 
+We developed a weather probabilty app which can help individuals determine the weather for months in advance to plan an event safetly without risking an environmental interference. This app analyzes 44 years of data drom 1981 to 2025 and than predicts the future weather of any particular place at any particular date, telling if the weather is very hot, very cold, windy, rainy, or it is uncomfortable. It also shows graphical representation and percentage likelihood of each weather condition. Moreover, it also recommends that is the date suitable for an outdoor event ot not. We have also integrated an AI chatbot to help manage people's queries and suggest them arrangements. It is important as it can help individuals, and organizations for planning events safetly and mitigate weather risks.
+
+## 🎥 Project Demo
+
+- **🖥️ PPT Presentation:** [https://kalkia-f5c91v9.gamma.site/](https://kalkia-f5c91v9.gamma.site/)
+- **🎬 Video Demo:**
+
+
+https://github.com/user-attachments/assets/af2c91a2-2432-48eb-b759-874ec16cd205
 
 ---
 
-## 📌 Project Description
+## 🌦️ Project Details
 
-The **NASA Weather App** combines multiple components:  
+Our project predicts **weather probabilities for future decades** to help individuals and organizations plan outdoor events **without worrying about unexpected weather conditions**.
 
-- **Frontend (Next.js + Tailwind CSS)** → Interactive dashboard and UI.  
-- **Backend (FastAPI)** → APIs to fetch, process, and serve NASA weather data.  
-- **Data Analysis (Python, Pandas, NumPy)** → Statistical and probability calculations on weather datasets.  
+It works by analyzing **44 years of NASA’s historical data (1981–2025)** and calculating how often different weather conditions occurred.  
+Based on this analysis, the app predicts the **likelihood (in percentage)** of each condition — whether it will be:
 
-The goal is to create an integrated platform where different team members (Frontend, Backend, Data) can collaborate seamlessly.
+- ☀️ Very Hot  
+- ❄️ Very Cold  
+- 🌧️ Rainy  
+- 🌬️ Very Windy  
+- 😣 Uncomfortable  
+
+---
+
+### 🎯 Purpose
+
+Our goal is to **harness the power of big data and AI** to extend forecasting horizons to **10–20 years**, offering actionable insights for better planning.
+
+---
+
+### 🌍 Benefits
+
+- 🥳 **Event Planning:** Helps individuals plan outdoor events like parties and celebrations.  
+- 🏢 **Organizations:** Assists in scheduling important meetings, conferences, and community events.  
+- 🌾 **Farmers:** Predicts rainfall likelihood to prevent over-irrigation, improve yield, and reduce flooding.  
+- 🏛️ **Governments:** Supports long-term risk mitigation for floods, droughts, and storms.  
+
+---
+
+### 🤖 Chatbot Integration
+
+We integrated an **AI-powered chatbot** that acts as a virtual event manager — helping users plan around weather risks and answering event-related queries.
+
+---
+
+### 📊 Key Factors Considered
+
+- **Accuracy:** Powered by 44 years of climatological data and fine-tuned ML logic.  
+- **User Experience:** Fast, intuitive, and visually engaging design.  
+- **Accessibility:** Works across all devices for users with varying technical skills.  
+- **Scalability:** Cloud-native architecture for real-time data updates.  
+- **Variables Analyzed:**  
+  Temperature extremes, humidity levels, wind speed, rainfall, UV index, and comfortability.  
+- **Visualization:** Integrated interactive graphs for easy understanding of trends and probabilities.
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Frontend**: Next.js, Tailwind CSS  
-- **Backend**: FastAPI (Python)  
-- **Data Analysis**: Python (Pandas, NumPy)  
+- **Frontend**: Next.js `14.2`, TypeScript, Tailwind CSS, ShadCN, LottieFiles (animations)
+- **Data & Resoures**: [NASA Daily Power API (MERRA-2)](https://power.larc.nasa.gov/docs/services/api/temporal/daily/), Google GEMINI API
+- **Data Analysis**: Recharts, chars (from shadcn)
 - **Version Control**: Git + GitHub  
-- **Collaboration**: GitHub CLI (`gh`) or plain `git`  
 
 ---
+
+## 🌐 App Flow
+
+```
+┌──────────────────────────────┐
+│ 🏠 User enters the app       │
+│    and clicks "Get Started"  │
+└───────────────┬──────────────┘
+                │
+                v
+┌──────────────────────────────┐
+│ 📍 User enters any location  │
+│     in the world             │
+└───────────────┬──────────────┘
+                │
+                v
+┌──────────────────────────────┐
+│ 📅 User selects a date       │
+│     (up to 1 year ahead)     │
+└───────────────┬──────────────┘
+                │
+                v
+┌──────────────────────────────────────────────────────────────────────────────┐
+│ 📊 Redirected to Result Page                                                 │
+│                                                                              │
+│ • View historical weather trends (1981–2025)                                 │
+│ • Interact with AI-Powered Weather Assistant                                 │
+│ • Download data as CSV or JSON                                               │
+│ • View threshold conditions:                                                 │
+│                                                                              │
+│    ☀️ Very Hot: temperature ≥ 35°C                                           │
+│    ❄️ Very Cold: temperature ≤ 5°C                                           │
+│    🌧️ Very Wet: rainfall ≥ 20 mm                                             │
+│    🌬️ Very Windy: wind speed ≥ 8 m/s                                         │
+│    😣 Very Uncomfortable: temperature ≥ 32°C AND humidity ≥ 70%              │
+│                                                                              │
+│    (≥ means “greater than or equal to”, ≤ means “less than or equal to”)     │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+```
 
 ## ⚡ Getting Started
 
@@ -134,6 +217,7 @@ git push origin main          # push updated main
   ```
   
   but if you want that switched branch code should be added in your code, write the script below
+
   ```
   git pull origin main → pulls the latest changes from the owner’s main branch into their local main.
   ```
