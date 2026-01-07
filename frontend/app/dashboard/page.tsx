@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import usePlacesAutocomplete, { getGeocode, getLatLng } from "use-places-autocomplete";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { format } from "date-fns";
 
 import { Search, Calendar as CalendarIcon, BarChart3, ArrowBigRightDash, ArrowBigRightIcon, ArrowRight } from "lucide-react";
 import { LoadScript, GoogleMap, Marker } from "@react-google-maps/api";
@@ -78,62 +81,64 @@ function LocationInput({ onSelect }: { onSelect: (location: { name: string; lat:
 }
 
 // ---- Simple DatePicker Component ----
-function formatDateDisplay(date: Date | undefined) {
-  if (!date) {
-    return ""
-  }
-
-  return date.toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "long", 
-    year: "numeric",
-  })
-}
-
 function SimpleDatePicker({ selectedDate, onDateChange }: { selectedDate: string, onDateChange: (date: string) => void }) {
-  const [displayValue, setDisplayValue] = React.useState("")
+  const [date, setDate] = React.useState<Date | undefined>(
+    selectedDate ? new Date(selectedDate) : undefined
+  );
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     if (selectedDate) {
-      const date = new Date(selectedDate)
-      setDisplayValue(formatDateDisplay(date))
+      setDate(new Date(selectedDate));
     } else {
-      setDisplayValue("")
+      setDate(undefined);
     }
-  }, [selectedDate])
+  }, [selectedDate]);
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const dateValue = e.target.value
-    onDateChange(dateValue)
-    
-    if (dateValue) {
-      const date = new Date(dateValue)
-      setDisplayValue(formatDateDisplay(date))
-    } else {
-      setDisplayValue("")
+  const handleSelect = (selectedDay: Date | undefined) => {
+    if (selectedDay) {
+      setDate(selectedDay);
+      // Format as YYYY-MM-DD for the backend
+      const year = selectedDay.getFullYear();
+      const month = String(selectedDay.getMonth() + 1).padStart(2, '0');
+      const day = String(selectedDay.getDate()).padStart(2, '0');
+      onDateChange(`${year}-${month}-${day}`);
+      setOpen(false);
     }
-  }
+  };
 
   return (
     <div className="flex flex-col gap-3">
       <label className="block text-sm font-medium font-lexend">Date</label>
-      <div className="relative">
-        <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
-        <Input
-          type="date"
-          value={selectedDate}
-          onChange={handleDateChange}
-          max="2026-12-31"
-          className="pl-10 py-6 rounded-none border-2 border-black"
-        />
-      </div>
-      {displayValue && (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className={`relative justify-start text-left font-normal pl-10 py-6 rounded-none border-2 border-black hover:bg-gray-50 ${
+              !date ? "text-muted-foreground" : ""
+            }`}
+          >
+            <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+            {date ? format(date, "dd MMMM yyyy") : <span>Pick a date</span>}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={handleSelect}
+            disabled={(date) => date > new Date("2026-12-31") || date < new Date("1900-01-01")}
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
+      {date && (
         <div className="text-sm text-gray-600 pl-1">
-          Selected: <span className="font-medium">{displayValue}</span>
+          Selected: <span className="font-medium">{format(date, "dd MMMM yyyy")}</span>
         </div>
       )}
     </div>
-  )
+  );
 }
 
 // ---- Helpers ----

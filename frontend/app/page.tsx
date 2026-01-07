@@ -55,7 +55,7 @@ export default function Home() {
               <h1 className="font-exo text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-gray-900 text-center">
                 Want to Plan an Outdoor 
                 <br className="hidden lg:block" />
-                 Events<span className="font-lexend">?</span>
+                Events<span className="font-lexend">?</span>
               </h1>
 
               <div className="max-w-4xl mx-auto flex justify-center">
