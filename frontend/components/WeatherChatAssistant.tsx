@@ -79,7 +79,7 @@ export function WeatherChatAssistant({ weatherData }: WeatherChatAssistantProps)
       .replace(/([A-Z])/g, " $1")
       .replace(/^./, (str) => str.toUpperCase());
 
-    return `Hello. I'm your Weather Planning Assistant.
+  return `Hello. I'm your Weather Planning Assistant.
 
 I've analyzed the weather data for **${data.location}** on **${data.date}**.
 
@@ -157,10 +157,12 @@ User Question: ${prompt}
       const data = await response.json();
       console.log("✅ Gemini API response received");
 
-      const aiResponse =
-        data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        data.candidates?.[0]?.output ||
-        "I'm here to help you with your weather planning!";
+     const aiResponse =
+  data?.candidates?.[0]?.content?.parts
+    ?.map((part: any) => part.text || "")
+    .join("") ||
+  data?.candidates?.[0]?.output ||
+  "I'm here to help you with your weather planning!";
 
       return aiResponse;
     } catch (error) {
