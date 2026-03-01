@@ -8,8 +8,9 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-white/10 bg-gradient-to-b from-[#0b0f19] via-[#0b1224] to-black text-gray-300 py-6 px-6">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        
+
         {/* Left Section */}
+        {/*
         <div className="flex items-center gap-3">
           <div className="relative w-10 h-10">
             <Image
@@ -28,16 +29,22 @@ export default function Footer() {
             </p>
           </div>
         </div>
+        */}
 
-        {/* Center Section (Project Title) */}
+        {/* Center Section */}
+        {/*
         <div className="text-center">
           <p className="font-lexend text-sm sm:text-base text-white">
             🌦️ <span className="font-semibold">Will It Rain On My Parade?</span>
           </p>
-          <p className="text-xs text-gray-400">A NASA-powered Weather Probability App</p>
+          <p className="text-xs text-gray-400">
+            A NASA-powered Weather Probability App
+          </p>
         </div>
+        */}
 
-        {/* Right Section (Links) */}
+        {/* Right Section */}
+        {/*
         <div className="flex items-center gap-5">
           <Link
             href="https://github.com/marjan-ahmed/nasa-weather-probability-app/"
@@ -57,13 +64,23 @@ export default function Footer() {
             <FaGlobe size={18} /> <span>NASA Space Apps</span>
           </Link>
         </div>
+        */}
       </div>
 
       {/* Divider */}
       <div className="border-t border-white/10 mt-6 pt-4 text-center">
+        {/*
         <p className="text-xs text-gray-400">
-          © {new Date().getFullYear()} <span className="font-medium text-white">Team ExploreX</span>.  
+          © {new Date().getFullYear()} 
+          <span className="font-medium text-white"> Team ExploreX</span>.  
           Built for <span className="text-blue-400">NASA Space Apps Challenge 2025</span>.
+        </p>
+        */}
+
+        {/* New Footer Line */}
+        <p className="text-xs text-gray-400">
+          Developed with ❤️ by 
+          <span className="font-medium text-white"> Muhammad Marjan Ahmed</span>
         </p>
       </div>
 
